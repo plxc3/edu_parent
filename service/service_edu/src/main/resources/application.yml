@@ -1,0 +1,21 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: service-edu
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://121.89.177.244/education?serverTimezone=GMT%2B8
+    password: 22446688
+    username: root
+    #返回的json数据全局时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:MM:SS
+    time-zone: GMT+8
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
