@@ -47,7 +47,7 @@ public class GetCode {
 
         // 4、包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName("eduservice"); //模块名
+        pc.setModuleName("serviceedu"); //模块名
         pc.setParent("com.plxcc");
         pc.setController("controller");
         pc.setEntity("entity");
@@ -58,7 +58,7 @@ public class GetCode {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
         /**
-         * 根据哪个表生成
+         *关联数据库中的表
          */
         strategy.setInclude("edu_teacher");
 

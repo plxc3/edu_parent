@@ -7,7 +7,7 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://121.89.177.244/education?serverTimezone=GMT%2B8
+    url: jdbc:mysql://121.89.177.244:3306/education?useUnicode=true&characterEncoding=UTF-8
     password: 22446688
     username: root
     #返回的json数据全局时间格式

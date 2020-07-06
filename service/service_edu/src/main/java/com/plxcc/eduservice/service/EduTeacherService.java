@@ -2,6 +2,8 @@ package com.plxcc.eduservice.service;
 
 import com.plxcc.eduservice.entity.EduTeacher;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.plxcc.eduservice.entity.vo.TeacherQuery;
+import com.plxcc.servicebase.common.Result;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduTeacherService extends IService<EduTeacher> {
 
+    Result pageTeacherConditon(TeacherQuery teacherQuery);
 }
