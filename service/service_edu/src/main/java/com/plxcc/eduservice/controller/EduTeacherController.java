@@ -8,6 +8,7 @@ import com.plxcc.eduservice.entity.EduTeacher;
 import com.plxcc.eduservice.entity.vo.TeacherQuery;
 import com.plxcc.eduservice.service.EduTeacherService;
 import com.plxcc.servicebase.common.Result;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ import java.util.Map;
  * @since 2020-07-04
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/eduservice/teacher")
 public class EduTeacherController {
 
@@ -48,6 +50,7 @@ public class EduTeacherController {
               return Result.fail();
           }
     }
+
 
     //分也查询
     //curert代表当前页，size代表每页的信息记录数
@@ -107,6 +110,39 @@ public class EduTeacherController {
     @PostMapping("/pageteacherCondition")
     public Result pageTeacherConditon(@RequestBody TeacherQuery teacherQuery){
         return  eduTeacherService.pageTeacherConditon(teacherQuery);
+    }
+
+    //添加讲师
+    @PostMapping("/addTeacher")
+    public Result addTeacher(@RequestBody EduTeacher eduTeacher){
+        if(eduTeacherService.save(eduTeacher)){
+            return Result.success().setMsg("保存成功");
+        }else{
+            return Result.fail();
+        }
+    }
+
+    //更新讲师
+    //根据讲师id查询讲师在进行更新
+
+    //查询讲师
+    @GetMapping("/{id}")
+    public Result getTeacherById(@PathVariable String id){
+        EduTeacher eduTeacher= eduTeacherService.getById(id);
+        if(StringUtils.checkValNotNull(eduTeacher)){
+            return Result.success()
+                    .setData("teacher",eduTeacher)
+                    .setMsg("查询成功");
+        }
+        return Result.fail();
+    }
+
+    @PutMapping("/updateteacher")
+    public Result updateTeacher(@RequestBody EduTeacher eduTeacher){
+        if(eduTeacherService.updateById(eduTeacher)){
+            return Result.success();
+        }
+        return Result.fail();
     }
 
 }

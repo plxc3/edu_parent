@@ -1,0 +1,19 @@
+server:
+  port: 8002
+#  服务名
+spring:
+  application:
+    name: service-oss
+    #环境设置：dev，test，prod
+  profiles:
+    active: dev
+#阿里云OSS
+#不同服务器，地址不同
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-chengdu.aliyuncs.com
+      keyid: LTAI4G47Q34AQ41ky9tt9UPH
+      keysecret: nSljzuNSLvFqzjfefj2bcFxVbEyMRx
+      bucketname: plxc
+

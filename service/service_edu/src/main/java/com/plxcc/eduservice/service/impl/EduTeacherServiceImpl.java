@@ -49,6 +49,8 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         Map map=new HashMap();
         map.put("total",pageTeacher.getTotal());
         map.put("records",pageTeacher.getRecords());
+        long pages=pageTeacher.getTotal()/teacherQuery.getSize();
+        map.put("pages",pages);
         return Result
                 .success()
                 .setData(map)
