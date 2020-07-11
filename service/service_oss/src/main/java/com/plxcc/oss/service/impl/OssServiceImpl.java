@@ -45,11 +45,7 @@ public class OssServiceImpl implements OssService {
         //获取文件名称
             String filename=file.getOriginalFilename();
 
-        //调用oss方法实现上传
-            //第一个参数 Bucket名称，第二个参数 上传的Oss的文件路径和文件名称
-            //第三个参数上传文件的输入流
-        ossClient.putObject(bucketName,filename,inputStream);
-        ossClient.shutdown();
+
 
         //把上传之后的文件返回
             //需要吧上传到阿里云oss的路径手动拼接出来，同时添加随机数避免文件名重复而出现覆盖
@@ -60,7 +56,13 @@ public class OssServiceImpl implements OssService {
             String datePath=new DateTime().toString("yyyy/MM/dd");
             filename=datePath+"/"+filename;
 
-            String url="https://"+bucketName+"."+ednpoint+filename;
+            //调用oss方法实现上传
+            //第一个参数 Bucket名称，第二个参数 上传的Oss的文件路径和文件名称
+            //第三个参数上传文件的输入流
+            ossClient.putObject(bucketName,filename,inputStream);
+            ossClient.shutdown();
+
+            String url="https://"+bucketName+"."+ednpoint+"/"+filename;
             return url;
         }catch (Exception e){
             e.printStackTrace();
