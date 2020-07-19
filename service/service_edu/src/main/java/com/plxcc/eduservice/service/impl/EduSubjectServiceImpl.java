@@ -79,16 +79,15 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
     public void saveSubject(MultipartFile file,EduSubjectService eduSubjectService) {
 
         try{
+
             InputStream in=file.getInputStream();
             //调用方法读取
             EasyExcel.read(in, SubjectData.class,new SubjectExcelListener(eduSubjectService)).sheet().doRead();
 
         }catch (Exception e){
+
             e.printStackTrace();
         }
-
-
-
 
     }
 }

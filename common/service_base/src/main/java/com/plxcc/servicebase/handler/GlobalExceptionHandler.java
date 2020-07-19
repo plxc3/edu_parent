@@ -1,6 +1,7 @@
 package com.plxcc.servicebase.handler;
 
 import com.plxcc.servicebase.common.Result;
+import com.plxcc.servicebase.utils.ZTException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,6 +37,18 @@ public class GlobalExceptionHandler {
         return Result.fail()
                 .setMsg("执行了ArithmeticException异常处理")
                 .setData("error",e.getMessage());
+    }
+
+    /**
+     * 自定义异常处理
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(ZTException.class)
+    @ResponseBody
+    public Result error(ZTException e){
+        e.printStackTrace();
+        return Result.fail().setMsg(e.getMsg()+e.getCode());
     }
 }
 

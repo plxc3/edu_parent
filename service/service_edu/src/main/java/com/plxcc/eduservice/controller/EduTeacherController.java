@@ -36,7 +36,7 @@ public class EduTeacherController {
     @GetMapping("/findall")
     public Result findAllTeacher(){
         List<EduTeacher> list=eduTeacherService.list(null);
-        return Result.success().setData("items",list)
+        return Result.success().setData("teacherlist",list)
                 .setMsg("所有讲师数据查询成功");
 
     }
