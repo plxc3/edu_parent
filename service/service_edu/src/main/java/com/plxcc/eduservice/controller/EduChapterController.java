@@ -2,6 +2,7 @@ package com.plxcc.eduservice.controller;
 
 
 import com.plxcc.eduservice.entity.EduChapter;
+import com.plxcc.eduservice.entity.EduCourse;
 import com.plxcc.eduservice.entity.vo.course.chapter.ChapterVo;
 import com.plxcc.eduservice.service.EduChapterService;
 import com.plxcc.servicebase.common.Result;
@@ -26,7 +27,7 @@ public class EduChapterController {
     @Autowired
     private EduChapterService eduChapterService;
 
-    /**
+    /**Course
      * 课程大纲列表,
      * 要根据课程id进行查询
      */
@@ -37,6 +38,44 @@ public class EduChapterController {
         return Result.success()
                 .setData("courseChapterVideo",chapterVoList);
     }
+/**
+ * 添加章节
+ */
+    @PostMapping("/addChapter")
+    public Result addChapter(@RequestBody EduChapter chapter){
+        eduChapterService.save(chapter);
+        return  Result.success();
+    }
+
+    /**
+     * 根据id查询章节
+     * @param chapterId
+     * @return
+     */
+    @GetMapping("/getChapterById/{chapterId}")
+    public Result getChpterById(@PathVariable String chapterId){
+        eduChapterService.getById(chapterId);
+        return Result.success();
+    }
+
+    /**
+     * 修改章节
+     */
+    @PostMapping("/updateChapter")
+    public Result updateChapter(@RequestBody EduChapter chapter){
+        eduChapterService.updateById(chapter);
+        return Result.success();
+    }
+    /**
+     * 删除
+     */
+    @DeleteMapping("/deleteChapter/{chapterId}")
+    public Result deleteChapter(@PathVariable String chapterId){
+        boolean flag=eduChapterService.deleteChpapter(chapterId);
+        return Result.success();
+    }
+
+
 
 
 }

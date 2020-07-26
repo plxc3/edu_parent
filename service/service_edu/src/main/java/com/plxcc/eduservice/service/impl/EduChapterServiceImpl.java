@@ -9,6 +9,7 @@ import com.plxcc.eduservice.mapper.EduChapterMapper;
 import com.plxcc.eduservice.service.EduChapterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.plxcc.eduservice.service.EduVideoService;
+import com.plxcc.servicebase.utils.ZTException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,9 +72,28 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
             finalList.add(chapterVo);
         }
 
-
-
-
         return finalList;
+    }
+
+    @Override
+    public boolean deleteChpapter(String chapterId) {
+        QueryWrapper<EduVideo> wrappervideo=new QueryWrapper<>();
+        wrappervideo.eq("chapter_id",chapterId);
+        int count=eduVideoService.count(wrappervideo);
+        if(count>0){
+            throw new ZTException(20001,"含有小节，不能删除");
+        }
+        else {
+            int result=baseMapper.deleteById(chapterId);
+            return  result>0;
+        }
+
+    }
+
+    @Override
+    public void deleteByCourseId(String courseId) {
+        QueryWrapper<EduChapter> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("course_id",courseId);
+        baseMapper.delete(queryWrapper);
     }
 }

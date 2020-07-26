@@ -19,3 +19,7 @@ spring:
 #mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#  <!--#配置mapper xml文件路径-->,必须pom.xml进行配置后使用
+mybatis-plus:
+  mapper-locations: classpath:com/plxcc/eduservice/mapper/xml/*.xml  #xml的路径

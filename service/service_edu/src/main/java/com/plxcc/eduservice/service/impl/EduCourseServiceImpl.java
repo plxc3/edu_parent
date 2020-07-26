@@ -2,11 +2,15 @@ package com.plxcc.eduservice.service.impl;
 
 import com.plxcc.eduservice.entity.EduCourse;
 import com.plxcc.eduservice.entity.EduCourseDescription;
+import com.plxcc.eduservice.entity.EduVideo;
 import com.plxcc.eduservice.entity.vo.course.CourseInfo;
+import com.plxcc.eduservice.entity.vo.course.CoursePublishInfoVo;
 import com.plxcc.eduservice.mapper.EduCourseMapper;
+import com.plxcc.eduservice.service.EduChapterService;
 import com.plxcc.eduservice.service.EduCourseDescriptionService;
 import com.plxcc.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.plxcc.eduservice.service.EduVideoService;
 import com.plxcc.servicebase.utils.ZTException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,20 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Autowired
     EduCourseDescriptionService eduCourseDescriptionService;
+
+    /**
+     * video
+     */
+    @Autowired
+    private EduVideoService videoService;
+    /**
+     * chapter
+     */
+    @Autowired
+    private EduChapterService chapterService;
+
+
+
     /**
      * 添加课程基本信息,注入两张表，课程基本信息表，课程简介表
      * @param courseInfo
@@ -68,5 +86,41 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         EduCourseDescription description=eduCourseDescriptionService.getById(courseId);
         courseInfo.setDescription(description.getDescription());
         return  courseInfo;
+    }
+
+    @Override
+    public void updateCourseInfo(CourseInfo courseInfo) {
+        //对课程基本信息进行封装
+        EduCourse eduCourse=new EduCourse();
+        BeanUtils.copyProperties(courseInfo,eduCourse);
+        int insert=baseMapper.updateById(eduCourse);
+        if(insert==0){
+            throw new ZTException(20001,"课程更新失败");
+        }
+        //对课程简介进行封装
+        EduCourseDescription description=new EduCourseDescription();
+        description.setId(courseInfo.getId());
+        description.setDescription(courseInfo.getDescription());
+        eduCourseDescriptionService.updateById(description);
+
+    }
+
+    @Override
+    public CoursePublishInfoVo getPublishInfo(String courseId) {
+        CoursePublishInfoVo publishInfo = baseMapper.getPublishInfo(courseId);
+        return publishInfo;
+    }
+    /**
+     * 删除所有课程信息
+     */
+    @Override
+    public void deleteFinalCourse(String courseId) {
+        videoService.deleteByCourseId(courseId);
+        chapterService.deleteByCourseId(courseId);
+        eduCourseDescriptionService.removeById(courseId);
+        int insert=baseMapper.deleteById(courseId);
+        if(insert<0){
+            throw new ZTException(20001,"删除失败，请检查");
+        }
     }
 }

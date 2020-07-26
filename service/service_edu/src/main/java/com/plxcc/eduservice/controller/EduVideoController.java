@@ -1,10 +1,11 @@
 package com.plxcc.eduservice.controller;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.plxcc.eduservice.entity.EduVideo;
+import com.plxcc.eduservice.service.EduVideoService;
+import com.plxcc.servicebase.common.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -16,8 +17,31 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/service/edu-video")
+@RequestMapping("/service/video")
 public class EduVideoController {
+    @Autowired
+    private EduVideoService videoService;
+
+    /**
+     * 增加小节
+     */
+    @PostMapping("/addVideo")
+    public Result addVide(@RequestBody EduVideo eduVideo){
+        videoService.save(eduVideo);
+        return Result.success();
+    }
+
+    /**
+     * 删除小节
+     * TODO
+     * @param
+     * @return
+     */
+    @DeleteMapping("deleteVideo/{videoId}")
+    public Result deleteVideo(@PathVariable String videoId){
+        videoService.removeById(videoId);
+        return Result.success();
+    }
 
 }
 

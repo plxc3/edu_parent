@@ -18,7 +18,7 @@ import java.util.List;
 public interface EduSubjectService extends IService<EduSubject> {
 
     //添加课程分类
-    void saveSubject(MultipartFile file,EduSubjectService eduSubjectService);
+    void saveSubject(MultipartFile file, EduSubjectService eduSubjectService);
 
     List<SubjectOne> getAllSubject();
 }
