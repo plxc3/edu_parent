@@ -11,8 +11,8 @@
 
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
+
     <modules>
-        <module>service-base</module>
         <module>service_base</module>
     </modules>
 
