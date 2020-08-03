@@ -14,6 +14,11 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:MM:SS
     time-zone: GMT+8
+#    nacos注册
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 
 
 #mybatis-plus:
@@ -23,3 +28,7 @@ spring:
 #  <!--#配置mapper xml文件路径-->,必须pom.xml进行配置后使用
 mybatis-plus:
   mapper-locations: classpath:com/plxcc/eduservice/mapper/xml/*.xml  #xml的路径
+#开启熔断机制
+feign:
+  hystrix:
+    enabled: true

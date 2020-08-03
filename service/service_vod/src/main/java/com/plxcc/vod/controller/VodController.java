@@ -51,5 +51,4 @@ public class VodController {
                 .success()
                 .setMsg("视频删除成功");
     }
-
 }

@@ -9,14 +9,18 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service_edu</artifactId>
+    <artifactId>server_msm</artifactId>
+
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel  还需要poi依赖 -->
+        <!--阿里云短信服务-->
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>easyexcel</artifactId>
-            <version>2.1.1</version>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
         </dependency>
 
     </dependencies>

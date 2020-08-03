@@ -1,27 +1,27 @@
-package com.plxcc.vod;
+package com.plxcc.cms;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 
 /**
- * @PackgeName: com.plxcc.vod
- * @ClassName: VodApplication
+ * @PackgeName: com.plxcc.cms
+ * @ClassName: CmsApplication
  * @Author: plxc
- * Date: 2020/7/27 23:36
+ * Date: 2020/8/1 1:14
  * project name: edu_parent
  * @Version:
  * @Description:
  */
-//不去加载数据库
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication
 @ComponentScan(basePackages = "com.plxcc")
+@MapperScan("com.plxcc.cms.mapper")
+//开启nacos注册
 @EnableDiscoveryClient
-public class VodApplication {
+public class CmsApplication {
     public static void main(String[] args) {
-        SpringApplication.run(VodApplication.class,args);
+        SpringApplication.run(CmsApplication.class,args);
     }
 }

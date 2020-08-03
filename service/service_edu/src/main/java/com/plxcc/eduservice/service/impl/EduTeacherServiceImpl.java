@@ -26,31 +26,34 @@ import java.util.Map;
 public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeacher> implements EduTeacherService {
     @Override
     public Result pageTeacherConditon(TeacherQuery teacherQuery) {
-        Page<EduTeacher> pageTeacher=new Page<>(teacherQuery.getCurrent(),teacherQuery.getSize());
-        QueryWrapper<EduTeacher> queryWrapper=new QueryWrapper<>();
+        Page<EduTeacher> pageTeacher = new Page<>(teacherQuery.getCurrent(), teacherQuery.getSize());
+        QueryWrapper<EduTeacher> queryWrapper = new QueryWrapper<>();
+
         //动态sql
-        String name=teacherQuery.getName();
-        Integer level=teacherQuery.getLevel();
-        String begin=teacherQuery.getBegin();
-        String end=teacherQuery.getEnd();
-        if(StringUtils.checkValNotNull(name)){
-            queryWrapper.like("name",name);
+        String name = teacherQuery.getName();
+        Integer level = teacherQuery.getLevel();
+        String begin = teacherQuery.getBegin();
+        String end = teacherQuery.getEnd();
+        if (StringUtils.checkValNotNull(name)) {
+            queryWrapper.like("name", name);
         }
-        if(StringUtils.checkValNotNull(level)){
-            queryWrapper.eq("level",level);
+        if (StringUtils.checkValNotNull(level)) {
+            queryWrapper.eq("level", level);
         }
-        if(StringUtils.checkValNotNull(begin)){
-            queryWrapper.ge("gmt_create",begin);
+        if (StringUtils.checkValNotNull(begin)) {
+            queryWrapper.ge("gmt_create", begin);
         }
-        if(StringUtils.checkValNotNull(end)){
-            queryWrapper.le("gmt_modified",end);
+        if (StringUtils.checkValNotNull(end)) {
+            queryWrapper.le("gmt_modified", end);
         }
-        page(pageTeacher,queryWrapper);
-        Map map=new HashMap();
-        map.put("total",pageTeacher.getTotal());
-        map.put("records",pageTeacher.getRecords());
-        long pages=pageTeacher.getTotal()/teacherQuery.getSize();
-        map.put("pages",pages);
+        page(pageTeacher, queryWrapper);
+        Map map = new HashMap();
+        map.put("total", pageTeacher.getTotal());
+        map.put("records", pageTeacher.getRecords());
+        long pages = pageTeacher.getTotal() / teacherQuery.getSize();
+
+        map.put("pages", pages);
+
         return Result
                 .success()
                 .setData(map)
