@@ -10,18 +10,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>service_cms</artifactId>
+    <packaging>jar</packaging>
+    <name>service_cms</name>
 
     <!-- 项目打包时会将java目录中的*.xml文件也进行打包 -->
+<!--    <build>-->
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/java</directory>-->
+<!--                <includes>-->
+<!--                    <include>**/*.xml</include>-->
+<!--                </includes>-->
+<!--                <filtering>false</filtering>-->
+<!--            </resource>-->
+<!--        </resources>-->
+<!--    </build>-->
+
+    <!--    test-->
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
+        <finalName>service_cms</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
