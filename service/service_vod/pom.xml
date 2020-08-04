@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>service_vod</artifactId>
+    <name>service_vod</name>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>com.aliyun</groupId>
@@ -45,6 +47,19 @@
             <artifactId>joda-time</artifactId>
         </dependency>
     </dependencies>
+
+
+    <!--    test-->
+    <build>
+        <finalName>service_vod</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
 
 
 </project>
