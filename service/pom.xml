@@ -14,10 +14,10 @@
     <modules>
         <module>service_edu</module>
         <module>service_oss</module>
-        <module>service_vod</module>
         <module>service_cms</module>
         <module>service_acl</module>
         <module>server_msm</module>
+        <module>server_test3</module>
     </modules>
 
     <dependencies>
