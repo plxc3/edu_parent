@@ -40,29 +40,16 @@
 <!--        </resources>-->
 <!--    </build>-->
 
+
     <!--    test-->
     <build>
-        <finalName>server_msm</finalName>
+        <finalName>service_oss</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork><!-- 如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->
-                    <executable>true</executable>
-                </configuration>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
-
     </build>
 
 

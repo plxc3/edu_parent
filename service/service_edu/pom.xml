@@ -37,7 +37,7 @@
 <!--    </build>-->
 
 
-    <!--    test-->
+    <!--项目打包的maven插件-->
     <build>
         <finalName>service_edu</finalName>
         <plugins>
