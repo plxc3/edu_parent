@@ -73,7 +73,7 @@ public class JwtUtils {
      * @param request
      * @return
      */
-    public static String getMemberIdByJwtToken(HttpServletRequest request) {
+    public static String getMemberIdByJwtToken(HttpServletRequest request) throws Exception {
         String jwtToken = request.getHeader("token");
         if(StringUtils.isEmpty(jwtToken)){return "";}
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(jwtToken);

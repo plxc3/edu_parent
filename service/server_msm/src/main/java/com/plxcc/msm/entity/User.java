@@ -1,8 +1,12 @@
 package com.plxcc.msm.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -35,6 +39,15 @@ public class User implements Serializable {
     private String userName;
 
     private Boolean isDisable;
+
+    @ApiModelProperty(value = "逻辑删除")
+    private Integer isDeleted;
+
+    @TableField(fill = FieldFill.INSERT)
+    private Date gmtCreate;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date gmtModified;
 
 
 }

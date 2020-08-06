@@ -2,6 +2,7 @@ package com.plxcc.msm.service;
 
 import com.plxcc.msm.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.plxcc.msm.entity.vo.LoginVo;
 import com.plxcc.msm.entity.vo.RegisterVo;
 
 /**
@@ -17,4 +18,6 @@ public interface UserService extends IService<User> {
     String login(User user);
 
     void register(RegisterVo registerVo);
+
+    LoginVo getUserInfo(String id);
 }

@@ -4,13 +4,18 @@ import com.alibaba.nacos.common.util.Md5Utils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.plxcc.msm.entity.User;
+import com.plxcc.msm.entity.UserProfile;
+import com.plxcc.msm.entity.vo.LoginVo;
 import com.plxcc.msm.entity.vo.RegisterVo;
 import com.plxcc.msm.mapper.UserMapper;
+import com.plxcc.msm.service.UserProfileService;
 import com.plxcc.msm.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.plxcc.msm.utlis.MD5;
 import com.plxcc.servicebase.utils.JwtUtils;
 import com.plxcc.servicebase.utils.ZTException;
+import io.swagger.annotations.Api;
+import org.bouncycastle.asn1.BERApplicationSpecific;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -28,6 +33,9 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired
+    private UserProfileService profileService;
+
+    @Autowired
     private RedisTemplate<String,String> redisTemplate;
 
     @Override
@@ -39,6 +47,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(!StringUtils.checkValNotNull(password)||!StringUtils.checkValNotNull(phone)){
             throw new ZTException(20001,"LoginException");
         }
+        //根据手机号查询用户是否存在并获取用户信息
         QueryWrapper<User> userQueryWrapper=new QueryWrapper<>();
         userQueryWrapper.eq("phone",phone);
         User user1=baseMapper.selectOne(userQueryWrapper);
@@ -46,15 +55,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(!StringUtils.checkValNotNull(user1)){
             throw new ZTException(20001,"LoginException");
         }
-        if(!password.equals(user1.getPassword())){
+
+        //对passwor进行加密与获取的密码进行判断
+        if(!user1.getPassword().equals(MD5.encrypt(password))){
             throw new ZTException(20001,"LoginException");
         }
+
         //判断用户是否禁用
        if(user1.getIsDisable()){
            throw new ZTException(20001,"LoginException");
        }
-
-        String token=JwtUtils.getJwtToken(user.getId(),user1.getUserName());
+        //易错点
+        String token=JwtUtils.getJwtToken(user1.getId(),user1.getUserName());
 
         return token;
     }
@@ -70,37 +82,47 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         String password=registerVo.getPassword();
 
+        //手机号和密码，验证码都不能为空，一个为空就注册异常，后面应该返回Result结果给前端用
         if(!StringUtils.checkValNotNull(code)||!StringUtils.checkValNotNull(phone)
         ||!StringUtils.checkValNotNull(userName)||!StringUtils.checkValNotNull(password))
         {
-            throw new ZTException(20001,"注册失败");
+            throw new ZTException(20001,"4大件有一个为空");
         }
 
         //验证验证码，从redis中获取
         String rediscode=redisTemplate.opsForValue().get(phone);
+//        System.out.println(rediscode);
 
-        if(!code.equals(rediscode)){
-            throw new ZTException(20001,"注册失败");
-        }
+//        if(!code.equals(rediscode)){
+//            throw new ZTException(20001,"注册码错误");
+//        }
 
         //判断手机号是否重复
         QueryWrapper<User> userQueryWrapper=new QueryWrapper<>();
         userQueryWrapper.eq("phone",phone);
         int count=baseMapper.selectCount(userQueryWrapper);
         if(count>0){
-            throw new ZTException(20001,"注册失败");
+            throw new ZTException(20001,"已经有用户存在");
         }
 
         //添加数据到数据库中
         User user=new User();
-        BeanUtils.copyProperties(user,registerVo);
+        System.out.println(user);
+        BeanUtils.copyProperties(registerVo,user);
         user.setPassword(MD5.encrypt(password));
-        baseMapper.insert(user);
+        System.out.println(baseMapper.insert(user));
+        UserProfile userProfile=new UserProfile();
+        userProfile.setId(user.getId());
+        userProfile.setAvatar("https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png");
+        profileService.save(userProfile);
 
+    }
 
-
-
-
-
+    @Override
+    public LoginVo getUserInfo(String id) {
+        LoginVo loginVo=new LoginVo();
+        BeanUtils.copyProperties(baseMapper.selectById(id),loginVo);
+        BeanUtils.copyProperties(profileService.getById(id),loginVo);
+        return loginVo;
     }
 }

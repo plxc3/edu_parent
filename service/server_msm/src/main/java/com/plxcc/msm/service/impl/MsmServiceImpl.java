@@ -9,6 +9,7 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.plxcc.msm.service.MsmService;
+import com.plxcc.msm.utlis.ConstantPropertiesUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -29,7 +30,7 @@ public class MsmServiceImpl implements MsmService {
     public Boolean sendCode(Map<String, Object> param, String phone) {
         if(!StringUtils.checkValNotNull(phone)) {return false;}
         DefaultProfile profile =
-                DefaultProfile.getProfile("default", "LTAI4GKbm3sbKrQutNLfpD6g", "otsw0JVsvBW5hsBbmXn3lMN3ox1FiL");
+                DefaultProfile.getProfile("default", ConstantPropertiesUtils.KEY_ID, ConstantPropertiesUtils.KEY_SERCERT);
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
 
