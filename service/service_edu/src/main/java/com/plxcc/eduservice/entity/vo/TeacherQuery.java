@@ -1,7 +1,6 @@
 package com.plxcc.eduservice.entity.vo;
 
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.models.auth.In;
 import lombok.Data;
 
 /**

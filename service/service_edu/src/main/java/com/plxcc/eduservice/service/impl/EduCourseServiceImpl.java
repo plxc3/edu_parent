@@ -2,7 +2,6 @@ package com.plxcc.eduservice.service.impl;
 
 import com.plxcc.eduservice.entity.EduCourse;
 import com.plxcc.eduservice.entity.EduCourseDescription;
-import com.plxcc.eduservice.entity.EduVideo;
 import com.plxcc.eduservice.entity.vo.course.CourseInfo;
 import com.plxcc.eduservice.entity.vo.course.CoursePublishInfoVo;
 import com.plxcc.eduservice.mapper.EduCourseMapper;

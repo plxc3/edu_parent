@@ -2,7 +2,6 @@ package com.plxcc.eduservice.controller;
 
 
 import com.plxcc.eduservice.entity.EduChapter;
-import com.plxcc.eduservice.entity.EduCourse;
 import com.plxcc.eduservice.entity.vo.course.chapter.ChapterVo;
 import com.plxcc.eduservice.service.EduChapterService;
 import com.plxcc.servicebase.common.Result;

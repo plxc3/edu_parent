@@ -1,7 +1,6 @@
 package com.plxcc.eduservice.controller;
 
 
-import com.baomidou.mybatisplus.extension.api.R;
 import com.plxcc.eduservice.entity.vo.subject.SubjectOne;
 import com.plxcc.eduservice.service.EduSubjectService;
 import com.plxcc.servicebase.common.Result;
@@ -27,7 +26,6 @@ public class EduSubjectController {
 
     @Autowired
     private EduSubjectService eduSubjectService;
-
     //添加课程分类
      //获取上传的文件，把文件的内容读取出来
     @PostMapping("/addsubject")
@@ -47,7 +45,6 @@ public class EduSubjectController {
      */
     @GetMapping("/getAllSubject")
     public Result getAllSubject(){
-
         List<SubjectOne> list=eduSubjectService.getAllSubject();
         return Result.success()
                 .setData("subject",list)

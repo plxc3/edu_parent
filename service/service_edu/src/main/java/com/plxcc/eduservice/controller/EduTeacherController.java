@@ -1,14 +1,12 @@
 package com.plxcc.eduservice.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.plxcc.eduservice.entity.EduTeacher;
 import com.plxcc.eduservice.entity.vo.TeacherQuery;
 import com.plxcc.eduservice.service.EduTeacherService;
 import com.plxcc.servicebase.common.Result;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +35,7 @@ public class EduTeacherController {
     public Result findAllTeacher(){
         List<EduTeacher> list=eduTeacherService.list(null);
         return Result.success().setData("teacherlist",list)
-                .setMsg("所有讲师数据查询成功");
+                .setMsg("返回一个教师列表");
 
     }
 

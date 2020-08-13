@@ -108,13 +108,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //添加数据到数据库中
         User user=new User();
         System.out.println(user);
+
         BeanUtils.copyProperties(registerVo,user);
         user.setPassword(MD5.encrypt(password));
-        System.out.println(baseMapper.insert(user));
-        UserProfile userProfile=new UserProfile();
-        userProfile.setId(user.getId());
-        userProfile.setAvatar("https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png");
-        profileService.save(userProfile);
+        //若果user存储成功
+        if(baseMapper.insert(user)>0){
+            //创建user_profile
+            UserProfile userProfile=new UserProfile();
+            userProfile.setId(user.getId());
+            userProfile.setAvatar("https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png");
+            profileService.save(userProfile);
+        }
 
     }
 

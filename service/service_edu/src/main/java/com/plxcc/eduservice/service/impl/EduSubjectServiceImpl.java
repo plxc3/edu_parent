@@ -1,6 +1,5 @@
 package com.plxcc.eduservice.service.impl;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.plxcc.eduservice.entity.EduSubject;

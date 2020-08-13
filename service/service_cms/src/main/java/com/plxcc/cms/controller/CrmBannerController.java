@@ -37,7 +37,7 @@ public class CrmBannerController {
      * 则直接读取缓存数据返回；如果缓存不存在，则执行方法，
      * 并把返回的结果存入缓存中。一般用在查询方法上。
      */
-    @Cacheable(key = "'selectBannerList'",value = "banner")
+    @Cacheable(value = "banner")
     @GetMapping("/bannerList")
     public Result getBannerList(){
         List<CrmBanner> banners=bannerService.list();

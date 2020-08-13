@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.plxcc.eduservice.entity.EduSubject;
 import com.plxcc.eduservice.entity.excel.SubjectData;
 import com.plxcc.eduservice.service.EduSubjectService;
-import com.plxcc.servicebase.common.Result;
 
 import java.util.Map;
 
@@ -83,7 +82,7 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
         super.invokeHeadMap(headMap, context);
     }
 
-    //读取完成后执行
+
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) {
 
