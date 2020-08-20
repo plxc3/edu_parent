@@ -24,7 +24,7 @@ import java.util.Map;
  * @Description:
  */
 @Service
-public class MsmServiceImpl implements MsmService {
+public class MsMServiceImpl implements MsmService {
 
     @Override
     public Boolean sendCode(Map<String, Object> param, String phone) {
