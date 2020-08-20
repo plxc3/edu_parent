@@ -3,6 +3,7 @@ package com.plxcc.eduservice.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.plxcc.eduservice.entity.EduCourse;
 import com.plxcc.eduservice.entity.EduTeacher;
 import com.plxcc.eduservice.entity.vo.TeacherQuery;
 import com.plxcc.eduservice.mapper.EduTeacherMapper;
@@ -53,7 +54,6 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         long pages = pageTeacher.getTotal() / teacherQuery.getSize();
 
         map.put("pages", pages);
-
         return Result
                 .success()
                 .setData(map)

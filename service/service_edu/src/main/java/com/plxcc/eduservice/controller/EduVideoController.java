@@ -27,7 +27,9 @@ public class EduVideoController {
      */
     @PostMapping("/addVideo")
     public Result addVide(@RequestBody EduVideo eduVideo){
+        //业务逻辑处理
         videoService.save(eduVideo);
+        //返回数据给前端
         return Result.success();
     }
 

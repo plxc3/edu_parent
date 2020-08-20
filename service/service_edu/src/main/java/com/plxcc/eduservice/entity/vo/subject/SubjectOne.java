@@ -16,6 +16,7 @@ import java.util.List;
  */
 @Data
 public class SubjectOne {
+
     private String id;
     private String title;
     /**

@@ -33,7 +33,7 @@ public class EduLoginController {
         map.put("roles","admin");
         map.put("name","admin");
         map.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        return Result.success()
+        return Result.success().setMsg("登陆成功")
                 .setData(map);
     }
 
